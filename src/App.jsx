@@ -14,20 +14,30 @@ function App() {
 
   function getMorse(e) {
     setInputValue(e.target.value);
-    const results = [...e.target.value.toUpperCase()]
-      .map((letter) => morseCode[letter])
-      .filter(Boolean)
-      .join(" ");
+    const results = e.target.value
+      .toUpperCase()
+      .split(" ")
+      .map((word) =>
+        [...word]
+          .map((letter) => morseCode[letter])
+          .filter(Boolean)
+          .join(" "),
+      )
+      .join("/ ");
     setMorse(results);
   }
 
   function getEng(e) {
     setInputValue(e.target.value);
     const results = e.target.value
-      .split(" ")
-      .map((eng) => reversedMorse[eng])
-      .filter(Boolean)
-      .join("");
+      .split(" / ")
+      .map((word) =>
+        word
+          .split(" ")
+          .map((code) => reversedMorse[code])
+          .join(""),
+      )
+      .join(" ");
     setEng(results);
   }
 
@@ -43,8 +53,12 @@ function App() {
           name="input"
           placeholder="Type here..."
           onChange={(e) => {
-            getMorse(e);
-            getEng(e);
+            setInputValue(e.target.value);
+            if (/[.-]/.test(e.target.value)) {
+              getEng(e);
+            } else {
+              getMorse(e);
+            }
           }}
           value={inputValue}
         ></textarea>

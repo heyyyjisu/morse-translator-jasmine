@@ -6,40 +6,37 @@ const morseCode = morseData[0];
 const reversedMorse = Object.fromEntries(
   Object.entries(morseCode).map(([key, value]) => [value, key]),
 );
+여깃;
+
+export function getMorse(str) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) =>
+      [...word]
+        .map((letter) => morseCode[letter])
+        .filter(Boolean)
+        .join(" "),
+    )
+    .join("/ ");
+}
+
+export function getEng(str) {
+  return str
+    .split(" / ")
+    .map((word) =>
+      word
+        .split(" ")
+        .map((code) => reversedMorse[code])
+        .join(""),
+    )
+    .join(" ");
+}
 
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [morse, setMorse] = useState("");
   const [eng, setEng] = useState("");
-
-  function getMorse(e) {
-    setInputValue(e.target.value);
-    const results = e.target.value
-      .toUpperCase()
-      .split(" ")
-      .map((word) =>
-        [...word]
-          .map((letter) => morseCode[letter])
-          .filter(Boolean)
-          .join(" "),
-      )
-      .join("/ ");
-    setMorse(results);
-  }
-
-  function getEng(e) {
-    setInputValue(e.target.value);
-    const results = e.target.value
-      .split(" / ")
-      .map((word) =>
-        word
-          .split(" ")
-          .map((code) => reversedMorse[code])
-          .join(""),
-      )
-      .join(" ");
-    setEng(results);
-  }
 
   console.log(inputValue);
   console.log(morse);
@@ -54,10 +51,15 @@ function App() {
           placeholder="Type here..."
           onChange={(e) => {
             setInputValue(e.target.value);
+            if (e.target.value === "") {
+              setEng("");
+              setMorse("");
+              return;
+            }
             if (/[.-]/.test(e.target.value)) {
-              getEng(e);
+              setEng(getEng(e.target.value));
             } else {
-              getMorse(e);
+              setMorse(getMorse(e.target.value));
             }
           }}
           value={inputValue}

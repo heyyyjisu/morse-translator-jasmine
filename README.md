@@ -1,16 +1,41 @@
-# React + Vite
+# Morse Translator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Morse code translator built with React. Type in English or Morse code — the app detects which one and translates automatically.
 
-Currently, two official plugins are available:
+![screenshot](./src/assets/screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Auto-detects input: English gets translated to Morse, Morse gets translated to English
+- Hover over the title to see it in Morse code
+- Input limited to 80 characters so the notebook layout stays clean
+- Tests with Jest
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech
 
-## Expanding the ESLint configuration
+- React (Vite)
+- SCSS (BEM naming)
+- Jest + Babel for testing
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting started
+
+```bash
+npm install
+npm run dev
+```
+
+## Tests
+
+```bash
+npm run test
+```
+
+## How it works
+
+| input | detected as | output |
+|---|---|---|
+| `hello` | English | `.... . .-.. .-.. ---` |
+| `.... . .-.. .-.. ---` | Morse | `hello` |
+| `hello world` | English | `.... . .-.. .-.. --- / .-- --- .-. .-.. -..` |
+
+Detection is based on whether the input contains `.` or `-`. If yes, it's treated as Morse code.

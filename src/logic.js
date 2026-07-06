@@ -15,7 +15,7 @@ export function getMorse(str) {
         .filter(Boolean)
         .join(" "),
     )
-    .join("/ ");
+    .join(" / ");
 }
 
 export function getEng(str) {

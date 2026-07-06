@@ -1,2 +1,17 @@
-@use './scss/normalize';
-@use './scss/variables/variables' as *;
+@use "./scss/normalize";
+@use "./scss/variables/variables" as *;
+
+html {
+  height: 100dvh;
+  width: 100dvw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  min-height: 100%;
+  background-size: 100%;
+  background-image: url("./assets/bg.png");
+  background-repeat: repeat;
+}

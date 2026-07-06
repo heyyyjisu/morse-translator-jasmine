@@ -1,1 +1,115 @@
-/* unlikely to need any styling at the app level but we'll leave this wired up just in case */
+@use "./scss/normalize";
+@use "./scss/variables/variables" as *;
+@use "./scss/variables/fonts";
+
+.main {
+  height: 100%;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-main;
+
+  &__heading {
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: #dccaa3;
+  }
+
+  &__inputText {
+    background-image: url("./assets/note.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    width: 300px;
+    aspect-ratio: 3/4;
+    font-size: 1.2rem;
+    overflow: visible;
+    margin-bottom: 1.5rem;
+
+    textarea {
+      border: none;
+      background: transparent;
+      outline: none;
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      resize: none;
+      outline: none;
+      line-height: 1.2;
+      height: 50%;
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+  }
+
+  &__display {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  &__bubble {
+    position: relative;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: fit-content;
+    background: #dccaa3;
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    max-width: 100%;
+    font-family: "Courier New", monospace;
+    font-size: 0.8rem;
+
+    &--wide {
+      max-width: 100%;
+    }
+
+    &--narrow {
+      max-width: 60%;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid #dccaa3;
+    }
+  }
+}
+
+.heading {
+  position: relative;
+
+  &__morse {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 2rem;
+    display: none;
+  }
+
+  &:hover &__text {
+    visibility: hidden;
+  }
+
+  &:hover &__morse {
+    display: block;
+  }
+}

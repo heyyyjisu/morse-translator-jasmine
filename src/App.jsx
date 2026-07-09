@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.scss";
-import { getEng, getMorse } from "./logic";
+import { getEng, getMorse, isMorse, getMorseTable } from "./logic";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -10,6 +10,25 @@ function App() {
   console.log(inputValue);
   console.log(morse);
   console.log(eng);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    if (!value) {
+      setEng("");
+      setMorse("");
+      return;
+    }
+
+    if (isMorse(value)) {
+      setMorse("");
+      setEng(getEng(value));
+    } else {
+      setEng("");
+      setMorse(getMorse(value));
+    }
+  };
 
   return (
     <>
@@ -26,21 +45,7 @@ function App() {
             name="input"
             placeholder="Type here..."
             maxLength={80}
-            onChange={(e) => {
-              setInputValue(e.target.value);
-              if (e.target.value === "") {
-                setEng("");
-                setMorse("");
-                return;
-              }
-              if (/[.-]/.test(e.target.value)) {
-                setEng(getEng(e.target.value));
-                setMorse("");
-              } else {
-                setMorse(getMorse(e.target.value));
-                setEng("");
-              }
-            }}
+            onChange={handleChange}
             value={inputValue}
           ></textarea>
         </div>
@@ -49,6 +54,13 @@ function App() {
             <div className="main__bubble main__bubble--narrow">{morse}</div>
           )}
           {eng && <div className="main__bubble main__bubble--wide">{eng}</div>}
+        </div>
+        <div className="morseTable">
+          {getMorseTable().map(([key, code]) => (
+            <div key={key}>
+              "{key}": "{code}"
+            </div>
+          ))}
         </div>
       </div>
     </>

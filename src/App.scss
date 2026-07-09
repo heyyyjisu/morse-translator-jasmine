@@ -3,45 +3,97 @@
 @use "./scss/variables/fonts";
 
 .main {
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  max-width: 480px;
-  padding: 2rem;
+  max-width: 800px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   font-family: $font-main;
+
+  @media (min-width: 1024px) {
+    max-width: 1000px;
+  }
+  @media (min-width: 1440px) {
+    max-width: 1200px;
+  }
 
   &__heading {
     font-size: 3rem;
     text-transform: uppercase;
     color: #dccaa3;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      font-size: 3.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 3.5rem;
+    }
+
+    @media (min-width: 1440px) {
+      font-size: 5.5rem;
+      padding-bottom: 1rem;
+    }
   }
 
   &__inputText {
     background-image: url("./assets/note.png");
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
     position: relative;
-    width: 300px;
-    aspect-ratio: 3/4;
-    font-size: 1.2rem;
+    width: 340px;
+    aspect-ratio: 4/3;
+    font-size: 1.5rem;
     overflow: visible;
-    margin-bottom: 1.5rem;
+
+    @media (min-width: 768px) {
+      width: 480px;
+    }
+
+    @media (min-width: 1024px) {
+      width: 450px;
+    }
+
+    @media (min-width: 1440px) {
+      width: 800px;
+      margin-top: -2rem;
+      font-size: 2.2rem;
+    }
 
     textarea {
       border: none;
       background: transparent;
       outline: none;
       position: absolute;
-      top: 15%;
-      left: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 22%;
+      width: 240px;
       resize: none;
-      outline: none;
       line-height: 1.2;
-      height: 50%;
+      height: 38%;
+      letter-spacing: 0.1rem;
+      color: #565353;
+      @media (min-width: 768px) {
+        top: 22%;
+        width: 400px;
+        height: 35%;
+      }
+
+      @media (min-width: 1024px) {
+        top: 22%;
+        width: 400px;
+        height: 40%;
+      }
+
+      @media (min-width: 1440px) {
+        width: 600px;
+        height: 35%;
+      }
 
       &::placeholder {
         color: #999;
@@ -60,14 +112,36 @@
     position: relative;
     left: 0;
     right: 0;
-    margin-inline: auto;
-    width: fit-content;
     background: #dccaa3;
     border-radius: 16px;
     padding: 1rem 1.25rem;
-    max-width: 100%;
     font-family: "Courier New", monospace;
+    text-align: center;
     font-size: 0.8rem;
+    margin: -2rem 0 1rem 0;
+    max-width: 100%;
+    min-width: 80%;
+
+    @media (min-width: 768px) {
+      max-width: 80%;
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 1024px) {
+      max-width: 90%;
+      min-width: 90%;
+      font-size: 1rem;
+      margin-top: -2rem;
+      margin-bottom: 5rem;
+    }
+
+    @media (min-width: 1440px) {
+      max-width: 90%;
+      min-width: 90%;
+      font-size: 1.5rem;
+      margin-top: -5rem;
+      margin-bottom: 8rem;
+    }
 
     &--wide {
       max-width: 100%;
@@ -103,6 +177,18 @@
     white-space: nowrap;
     font-size: 2rem;
     display: none;
+
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 2.5rem;
+    }
+
+    @media (min-width: 1440px) {
+      font-size: 3.5rem;
+    }
   }
 
   &:hover &__text {
@@ -111,5 +197,20 @@
 
   &:hover &__morse {
     display: block;
+  }
+}
+
+.morseTable {
+  display: none;
+  @media (min-width: 1024px) {
+    color: #dccaa3;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.25rem 1rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+  }
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(10, 1fr);
   }
 }
